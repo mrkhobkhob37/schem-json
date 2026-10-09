@@ -132,7 +132,7 @@ Here for instance is an example which validates that instances are JSON objects 
 
 .. testcode::
 
-    from jsonschema import Draft202012Validator
+    from schem_json import Draft202012Validator
     validator = Draft202012Validator(
         {
             "type": "object",
@@ -266,7 +266,7 @@ Given such a registry, we can now, for instance, validate instances against sche
 
 .. testcode::
 
-    from jsonschema import Draft202012Validator
+    from schem_json import Draft202012Validator
     Draft202012Validator(
         {"$ref": "https://json.schemastore.org/pyproject.json"},
         registry=registry,
@@ -278,7 +278,7 @@ which should in this case indicate the example data is invalid:
 
     Traceback (most recent call last):
         ...
-    jsonschema.exceptions.ValidationError: 12 is not of type 'string'
+    schem_json.exceptions.ValidationError: 12 is not of type 'string'
 
     Failed validating 'type' in schema['properties']['project']['properties']['name']:
         {'pattern': '^([a-zA-Z\\d]|[a-zA-Z\\d][\\w.-]*[a-zA-Z\\d])$',
@@ -330,7 +330,7 @@ If you currently pass a set of schemas via e.g.:
 
 .. code-block:: python
 
-    from jsonschema import Draft202012Validator, RefResolver
+    from schem_json import Draft202012Validator, RefResolver
     resolver = RefResolver.from_schema(
         schema={"title": "my schema"},
         store={"http://example.com": {"type": "integer"}},
@@ -348,7 +348,7 @@ you should be able to simply move to something like:
     from referencing import Registry
     from referencing.jsonschema import DRAFT202012
 
-    from jsonschema import Draft202012Validator
+    from schem_json import Draft202012Validator
 
     registry = Registry().with_resource(
         "http://example.com",

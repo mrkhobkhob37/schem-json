@@ -1,4 +1,4 @@
-.. currentmodule:: jsonschema.validators
+.. currentmodule:: schem_json.validators
 
 .. _creating-validators:
 
@@ -31,6 +31,6 @@ where in the instance or schema respectively the error occurred.
 The Validator Protocol
 ----------------------
 
-``jsonschema`` defines a `protocol <typing.Protocol>`, `jsonschema.protocols.Validator` which can be used in type annotations to describe the type of a validator.
+``jsonschema`` defines a `protocol <typing.Protocol>`, `schem_json.protocols.Validator` which can be used in type annotations to describe the type of a validator.
 
 For full details, see `validator-protocol`.

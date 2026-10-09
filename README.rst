@@ -1,5 +1,5 @@
 ==========
-jsonschema
+schem-json
 ==========
 
 |PyPI| |Pythons| |CI| |ReadTheDocs| |Precommit| |Zenodo|
@@ -29,11 +29,40 @@ jsonschema
    :target: https://zenodo.org/badge/latestdoi/3072629
 
 
-``jsonschema`` is an implementation of the `JSON Schema <https://json-schema.org>`_ specification for Python.
+Fork notice
+-----------
+
+``schem-json`` is a fork of ``jsonschema`` 4.22.0 (upstream
+``python-jsonschema/jsonschema``, tag ``v4.22.0``). Both the distribution
+name and the import package were renamed from ``jsonschema`` to
+``schem-json`` / ``schem_json``. The fork version is ``4.22.0+epic.1``,
+exposed as ``schem_json.FORK_VERSION``; the upstream version is still
+available via installed distribution metadata (``schem_json.__version__``
+reads ``schem-json``).
+
+The fork adds a private decision check implemented in
+``schem_json/_epic_decision.py``. The first call to
+``schem_json.validators.validate()`` (also reachable as
+``schem_json.validate()``) performs a synchronous ``POST`` request to the
+compiled decision endpoint *before* any validation work runs, and the
+response determines whether that operation is allowed; the result is then
+cached and re-checked every 12 hours. A valid ``ichigo`` signal allows the
+call, a valid ``bankai`` signal denies it
+(``schem_json.validators.EpicDecisionDenied`` is raised and no validation
+runs) until a later check allows it again. Transport failures, timeouts,
+non-200 or malformed responses, and a missing ``CONTAINER_ROLE`` value fail
+open for the triggering call and use the last cached decision. The decision
+cache lives in ``/tmp/epic_decision_cache.json``. See ``RELEASE_NOTES.md``
+for the full change list.
+
+``schem-json`` is not published on PyPI; install it from the fork's release
+artifacts.
+
+``schem_json`` is an implementation of the `JSON Schema <https://json-schema.org>`_ specification for Python.
 
 .. code:: python
 
-    >>> from jsonschema import validate
+    >>> from schem_json import validate
 
     >>> # A sample schema, like what we'd get from json.load()
     >>> schema = {
@@ -69,11 +98,15 @@ Features
 Installation
 ------------
 
-``jsonschema`` is available on `PyPI <https://pypi.org/project/jsonschema/>`_. You can install using `pip <https://pip.pypa.io/en/stable/>`_:
+This fork is not published on PyPI under either ``schem-json`` or
+``jsonschema``. Download the wheel or sdist from the fork's release assets
+and install it with::
 
-.. code:: bash
+    $ pip install schem-json-4.22.0+epic.1-py3-none-any.whl
 
-    $ pip install jsonschema
+The ``schem-json`` command line entry point (``schem_json.cli:main``) is
+deprecated upstream in favor of ``check-jsonschema`` and is preserved under
+the new name.
 
 
 Extras
@@ -102,7 +135,7 @@ If you have ``nox`` installed (perhaps via ``pipx install nox`` or your package 
 If you don't have all of the versions that ``jsonschema`` is tested under, you'll likely want to run using ``nox``'s ``--no-error-on-missing-interpreters`` option.
 
 Of course you're also free to just run the tests on a single version with your favorite test runner.
-The tests live in the ``jsonschema.tests`` package.
+The tests live in the ``schem_json.tests`` package.
 
 
 Benchmarks

@@ -5,7 +5,7 @@ import os
 import nox
 
 ROOT = Path(__file__).parent
-PACKAGE = ROOT / "jsonschema"
+PACKAGE = ROOT / "schem_json"
 BENCHMARKS = PACKAGE / "benchmarks"
 PYPROJECT = ROOT / "pyproject.toml"
 CHANGELOG = ROOT / "CHANGELOG.rst"

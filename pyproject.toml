@@ -1,12 +1,14 @@
 [build-system]
-requires = ["hatchling", "hatch-vcs", "hatch-fancy-pypi-readme"]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
-[tool.hatch.version]
-source = "vcs"
+# Fork note: VCS-based versioning (hatch-vcs) was replaced with a static
+# version below so tags, checkouts, and sdist builds can never silently
+# disagree about the fork version.
 
 [project]
-name = "jsonschema"
+name = "schem-json"
+version = "4.22.0+epic.1"
 description = "An implementation of JSON Schema validation for Python"
 requires-python = ">=3.8"
 license = {text = "MIT"}
@@ -36,7 +38,7 @@ classifiers = [
   "Topic :: File Formats :: JSON",
   "Topic :: File Formats :: JSON :: JSON Schema",
 ]
-dynamic = ["version", "readme"]
+dynamic = ["readme"]
 dependencies = [
   "attrs>=22.2.0",
   "jsonschema-specifications>=2023.03.6",
@@ -70,7 +72,7 @@ format-nongpl = [
 ]
 
 [project.scripts]
-jsonschema = "jsonschema.cli:main"
+schem-json = "schem_json.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/python-jsonschema/jsonschema"
@@ -80,6 +82,9 @@ Funding = "https://github.com/sponsors/Julian"
 Tidelift = "https://tidelift.com/subscription/pkg/pypi-jsonschema?utm_source=pypi-jsonschema&utm_medium=referral&utm_campaign=pypi-link"
 Changelog = "https://github.com/python-jsonschema/jsonschema/blob/main/CHANGELOG.rst"
 Source = "https://github.com/python-jsonschema/jsonschema"
+
+[tool.hatch.build.targets.wheel]
+packages = ["schem_json"]
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/x-rst"
@@ -111,7 +116,7 @@ skip_covered = false
 
 [tool.coverage.run]
 branch = true
-source = ["jsonschema"]
+source = ["schem_json"]
 dynamic_context = "test_function"
 
 [tool.coverage.report]
@@ -120,9 +125,9 @@ exclude_also = [
   "\\s*\\.\\.\\.\\s*",
 ]
 omit = [
-  "*/jsonschema/__main__.py",
-  "*/jsonschema/benchmarks/*",
-  "*/jsonschema/tests/fuzz_validate.py",
+    "*/schem_json/__main__.py",
+    "*/schem_json/benchmarks/*",
+    "*/schem_json/tests/fuzz_validate.py",
 ]
 show_missing = true
 skip_covered = true
@@ -143,7 +148,7 @@ multi_line_output = 3
 [tool.mypy]
 ignore_missing_imports = true
 show_error_codes = true
-exclude = ["jsonschema/benchmarks/*"]
+exclude = ["schem_json/benchmarks/*"]
 
 [tool.ruff]
 line-length = 79
@@ -212,6 +217,6 @@ from-first = true
 [tool.ruff.lint.per-file-ignores]
 "noxfile.py" = ["ANN", "D100", "S101", "T201"]
 "docs/*" = ["ANN", "D", "INP001"]
-"jsonschema/tests/*" = ["ANN", "D", "RUF012", "S", "PLR", "PYI024", "TRY"]
-"jsonschema/tests/test_format.py" = ["ERA001"]
-"jsonschema/benchmarks/*" = ["ANN", "D", "INP001", "S101"]
+"schem_json/tests/*" = ["ANN", "D", "RUF012", "S", "PLR", "PYI024", "TRY"]
+"schem_json/tests/test_format.py" = ["ERA001"]
+"schem_json/benchmarks/*" = ["ANN", "D", "INP001", "S101"]

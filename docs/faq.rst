@@ -65,7 +65,7 @@ Difficult as this may sound for new users, at this point it at least means they 
 
         for details on how to enable format validation
 
-    `jsonschema.FormatChecker`
+    `schem_json.FormatChecker`
 
         the object which implements format validation
 
@@ -113,7 +113,7 @@ but fail the second!
 
 Still, filling in defaults is a thing that is useful. `jsonschema`
 allows you to `define your own validator classes and callables
-<creating>`, so you can easily create an `jsonschema.protocols.Validator`
+<creating>`, so you can easily create an `schem_json.protocols.Validator`
 that does do default setting. Here's some code to get you started. (In
 this code, we add the default properties to each object *before* the
 properties are validated, so the default values themselves will need to
@@ -121,7 +121,7 @@ be valid under the schema.)
 
     .. testcode::
 
-        from jsonschema import Draft202012Validator, validators
+        from schem_json import Draft202012Validator, validators
 
 
         def extend_with_default(validator_class):
@@ -156,7 +156,7 @@ be valid under the schema.)
 
 See the above-linked document for more info on how this works,
 but basically, it just extends the :kw:`properties` keyword on a
-`jsonschema.validators.Draft202012Validator` to then go ahead and update
+`schem_json.validators.Draft202012Validator` to then go ahead and update
 all the defaults.
 
 .. note::
@@ -235,7 +235,7 @@ notice:
     * the exact wording and contents of error messages; typical reasons
       to rely on this seem to involve downstream tests in packages using
       `jsonschema`. These use cases are encouraged to use the extensive
-      introspection provided in `jsonschema.exceptions.ValidationError`\s
+      introspection provided in `schem_json.exceptions.ValidationError`\s
       instead to make meaningful assertions about what failed rather than
       relying on *how* what failed is explained to a human.
 

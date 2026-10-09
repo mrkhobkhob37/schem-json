@@ -3,13 +3,13 @@ import importlib.metadata
 import re
 
 ROOT = Path(__file__).parent.parent
-PACKAGE_SRC = ROOT / "jsonschema"
+PACKAGE_SRC = ROOT / "schem_json"
 
-project = "jsonschema"
+project = "schem-json"
 author = "Julian Berman"
 copyright = "2013, " + author
 
-release = importlib.metadata.version("jsonschema")
+release = importlib.metadata.version("schem-json")
 version = release.partition("-")[0]
 
 language = "en"
@@ -40,8 +40,8 @@ html_theme = "furo"
 
 # See sphinx-doc/sphinx#10785
 _TYPE_ALIASES = {
-    "jsonschema._format._F": ("data", "_F"),
-    "_typing.id_of": ("data", "jsonschema._typing.id_of"),
+    "schem_json._format._F": ("data", "_F"),
+    "_typing.id_of": ("data", "schem_json._typing.id_of"),
 }
 
 
@@ -76,9 +76,9 @@ def setup(app):
 # = Builders =
 
 doctest_global_setup = """
-from jsonschema import *
-from jsonschema import exceptions
-import jsonschema.validators
+from schem_json import *
+from schem_json import exceptions
+import schem_json.validators
 """
 
 

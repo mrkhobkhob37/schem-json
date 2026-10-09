@@ -7,18 +7,18 @@ Submodules
 .. toctree::
    :titlesonly:
 
-   /api/jsonschema/validators/index
-   /api/jsonschema/exceptions/index
-   /api/jsonschema/protocols/index
+   /api/schem_json/validators/index
+   /api/schem_json/exceptions/index
+   /api/schem_json/protocols/index
 
-:mod:`jsonschema`
+:mod:`schem_json`
 -----------------
 
-.. automodule:: jsonschema
+.. automodule:: schem_json
    :members:
    :imported-members:
    :exclude-members: FormatError, Validator, ValidationError
 
-.. autodata:: jsonschema._format._F
+.. autodata:: schem_json._format._F
 
-.. autodata:: jsonschema._typing.id_of
+.. autodata:: schem_json._typing.id_of
